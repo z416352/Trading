@@ -1,0 +1,6 @@
+[submodule "Database-api"]
+	path = Database-api
+	url = https://github.com/z416352/Database-api.git
+[submodule "Crawler"]
+	path = Crawler
+	url = https://github.com/z416352/Crawler.git
