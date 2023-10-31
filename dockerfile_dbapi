@@ -1,0 +1,15 @@
+FROM golang:1.21.0 AS build
+
+COPY ./Database-api /Database-api
+COPY ./Crawler /Crawler
+
+WORKDIR /Database-api/cmd
+RUN CGO_ENABLED=0 go build -v -o main .
+
+
+FROM alpine AS api
+
+COPY --from=build /Database-api/cmd/main /
+
+# WORKDIR /app
+CMD ["/main"]

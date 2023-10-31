@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crawler-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crawler
+  template:
+    metadata:
+      labels:
+        app: crawler
+    spec:
+      containers:
+        - name: crawler-container
+          image: crawler:v1
+          imagePullPolicy: Always
+          env:
+            - name: db_API_ServiceName
+              value: db-api-service
+            - name: db_API_ServicePort
+              value: "8080"
+            - name: db_API_Namespace
+              value: default
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
